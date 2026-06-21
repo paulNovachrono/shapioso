@@ -7,7 +7,7 @@ import SmoothScroll from "./components/SmoothScroll";
 export const metadata: Metadata = {
   title: "Shapioso",
   description: "Your digital partner",
-  icons: [{ rel: "icon", url: "/logo.svg" }],
+  icons: [{ rel: "icon", url: "/logo.jpeg" }],
 };
 
 export default function RootLayout({

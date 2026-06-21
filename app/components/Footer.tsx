@@ -88,7 +88,7 @@ export default function Footer() {
           <div className="md:col-span-3">
             <Link href="/" className="block w-36 md:w-44">
               <Image
-                src="/logo.svg"
+                src="/shapioso-logo.png"
                 alt="Shapioso"
                 width={500}
                 height={486}

@@ -146,8 +146,8 @@ export default function Home() {
                   className={`${s.span} group min-h-[180px] md:min-h-[200px] rounded-xl bg-canvas border border-hairline-soft p-5 md:p-6 flex flex-col justify-between transition-all hover:border-hairline hover:shadow-sm overflow-hidden`}
                 >
                   <div>
-                    <div className="w-9 h-9 rounded-lg bg-surface-soft flex items-center justify-center text-muted shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5">
-                      <Icon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                    <div className="w-[50px] h-[50px] rounded-xl bg-surface-soft flex items-center justify-center text-muted shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5">
+                      <Icon className="w-[25px] h-[25px] transition-transform duration-300 group-hover:scale-110" />
                     </div>
                     <h3 className="mt-3 text-base font-semibold text-ink">
                       {s.title}

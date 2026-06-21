@@ -89,8 +89,7 @@ export default function Navbar() {
       <div className="mx-auto flex min-h-[60px] items-center justify-between px-6 md:min-h-[75px] md:px-10 max-w-7xl">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="Shapioso" className="h-8 w-auto" />
-          <span className="text-xl font-display font-medium tracking-tight text-ink">Shapioso</span>
+          <img src="/shapioso-logo.png" alt="Shapioso" className="h-10 w-auto" />
         </a>
 
         {/* Desktop Nav */}
