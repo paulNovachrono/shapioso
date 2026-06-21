@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -88,9 +89,9 @@ export default function Navbar() {
     <header className={`fixed top-0 left-0 right-0 border-b border-hairline bg-canvas z-50 transition-transform duration-300 ${hidden ? '-translate-y-full' : 'translate-y-0'}`}>
       <div className="mx-auto flex min-h-[60px] items-center justify-between px-6 md:min-h-[75px] md:px-10 max-w-7xl">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <img src="/shapioso-logo.png" alt="Shapioso" className="h-[52px] w-auto" />
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1 lg:gap-2">
@@ -101,7 +102,7 @@ export default function Navbar() {
               onMouseEnter={() => showDropdown(item.label)}
               onMouseLeave={hideDropdown}
             >
-              <a
+              <Link
                 href={item.href}
                 className="flex items-center gap-1 px-3 py-2 text-sm font-medium tracking-[-0.3px] text-body transition-colors hover:text-ink rounded-lg hover:bg-surface-soft"
               >
@@ -119,7 +120,7 @@ export default function Navbar() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 )}
-              </a>
+              </Link>
 
               {/* Dropdown */}
               {item.dropdown && activeDropdown === item.label && (
@@ -128,25 +129,25 @@ export default function Navbar() {
                   onMouseLeave={hideDropdown}
                   className="absolute left-0 top-full mt-2 w-[640px] grid grid-cols-2 gap-3 rounded-xl bg-canvas p-4 shadow-[0_24px_64px_rgba(10,10,10,0.12)] border border-hairline-soft">
                   {item.dropdown.map((service) => (
-                      <a
+                      <Link
                         key={service.title}
                         href={`/services/${service.slug}`}
                         className="flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-surface-soft group"
                       >
-                      <div
-                        className={`shrink-0 w-12 h-12 rounded-md bg-gradient-to-br ${service.gradient} flex items-center justify-center text-white text-lg font-bold`}
-                      >
-                        {service.title.charAt(0)}
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-ink group-hover:text-primary">
-                          {service.title}
-                        </p>
-                        <p className="text-xs text-muted mt-0.5 leading-snug">
-                          {service.description}
-                        </p>
-                      </div>
-                    </a>
+                        <div
+                          className={`shrink-0 w-12 h-12 rounded-md bg-gradient-to-br ${service.gradient} flex items-center justify-center text-white text-lg font-bold`}
+                        >
+                          {service.title.charAt(0)}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-ink group-hover:text-primary">
+                            {service.title}
+                          </p>
+                          <p className="text-xs text-muted mt-0.5 leading-snug">
+                            {service.description}
+                          </p>
+                        </div>
+                      </Link>
                   ))}
                 </div>
               )}
@@ -156,12 +157,12 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
-          <a
+          <Link
             href="/contact"
             className="flex items-center justify-center h-11 px-6 rounded-md bg-primary text-on-primary text-sm font-semibold tracking-[-0.3px] transition-colors hover:bg-primary-active"
           >
             Get a Quote
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -201,18 +202,18 @@ export default function Navbar() {
                     </svg>
                   </button>
                 ) : (
-                  <a
+                  <Link
                     href={item.href}
                     className="flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium text-body hover:text-ink rounded-lg hover:bg-surface-soft"
                     onClick={() => setMobileOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 )}
                 {item.dropdown && activeDropdown === item.label && (
                   <div className="ml-3 mt-1 flex flex-col gap-1 pb-2">
                     {item.dropdown.map((service) => (
-                      <a
+                      <Link
                         key={service.title}
                         href={`/services/${service.slug}`}
                         className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-surface-soft"
@@ -224,7 +225,7 @@ export default function Navbar() {
                           {service.title.charAt(0)}
                         </div>
                         <span className="text-sm text-body">{service.title}</span>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -232,12 +233,12 @@ export default function Navbar() {
             ))}
           </nav>
           <div className="mt-4 px-3">
-            <a
+            <Link
               href="/contact"
               className="flex items-center justify-center h-11 w-full rounded-md bg-primary text-on-primary text-sm font-semibold tracking-[-0.3px] transition-colors hover:bg-primary-active"
             >
               Get a Quote
-            </a>
+            </Link>
           </div>
         </div>
       )}
