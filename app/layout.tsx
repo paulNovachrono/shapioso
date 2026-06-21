@@ -7,6 +7,7 @@ import SmoothScroll from "./components/SmoothScroll";
 export const metadata: Metadata = {
   title: "Shapioso",
   description: "Your digital partner",
+  icons: [{ rel: "icon", url: "/logo.svg" }],
 };
 
 export default function RootLayout({
@@ -15,11 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full bg-canvas font-sans text-body">
+      <html lang="en" className="h-full overflow-hidden antialiased">
+      <body className="h-full overflow-hidden bg-canvas font-sans text-body">
         <SmoothScroll>
           <Navbar />
-          {children}
+          <div className="pt-[60px] md:pt-[75px]">
+            {children}
+          </div>
           <Footer />
         </SmoothScroll>
       </body>

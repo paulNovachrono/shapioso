@@ -1,10 +1,15 @@
+import AboutHero from "../components/AboutHero";
+import ProcessSteps from "../components/ProcessSteps";
+import TechStack from "../components/TechStack";
+import Testimonials from "../components/Testimonials";
+
 export default function AboutPage() {
   return (
     <main className="flex-1">
-      <section className="mx-auto max-w-7xl px-6 md:px-10 py-24 md:py-32">
-        <h1 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-ink">About Us</h1>
-        <p className="mt-6 text-lg text-body max-w-2xl">Coming soon.</p>
-      </section>
+      <AboutHero />
+      <ProcessSteps />
+      <TechStack />
+      <Testimonials />
     </main>
   );
 }

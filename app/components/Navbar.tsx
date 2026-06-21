@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -13,31 +13,37 @@ const navItems = [
         title: "Website Design",
         description: "Beautiful, responsive designs tailored to your brand",
         gradient: "from-brand-pink to-rose-400",
+        slug: "website-design",
       },
       {
         title: "Website Development",
         description: "Robust, scalable websites built with modern tech",
         gradient: "from-brand-teal to-emerald-600",
+        slug: "website-development",
       },
       {
         title: "Domain & Hosting",
         description: "Reliable domain registration and hosting solutions",
         gradient: "from-brand-lavender to-purple-400",
+        slug: "domain-hosting",
       },
       {
         title: "Digital Marketing",
         description: "Data-driven strategies to grow your online presence",
         gradient: "from-brand-peach to-orange-400",
+        slug: "digital-marketing",
       },
       {
         title: "Graphic Design & Animation",
         description: "Stunning visuals and motion graphics that captivate",
         gradient: "from-brand-ochre to-yellow-500",
+        slug: "graphic-design-animation",
       },
       {
         title: "Video Editing & Creation",
         description: "Professional video production from concept to final cut",
         gradient: "from-brand-mint to-teal-400",
+        slug: "video-editing-creation",
       },
     ],
   },
@@ -49,7 +55,23 @@ const navItems = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [hidden, setHidden] = useState(false);
+  const lastScroll = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
+      if (current > lastScroll.current && current > 80) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastScroll.current = current;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const showDropdown = (label: string) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -63,11 +85,12 @@ export default function Navbar() {
   };
 
   return (
-    <header className="relative border-b border-hairline bg-canvas z-50">
+    <header className={`fixed top-0 left-0 right-0 border-b border-hairline bg-canvas z-50 transition-transform duration-300 ${hidden ? '-translate-y-full' : 'translate-y-0'}`}>
       <div className="mx-auto flex min-h-[60px] items-center justify-between px-6 md:min-h-[75px] md:px-10 max-w-7xl">
         {/* Logo */}
-        <a href="#" className="text-2xl font-display font-medium tracking-tight text-ink">
-          Shapioso
+        <a href="/" className="flex items-center gap-2">
+          <img src="/logo.svg" alt="Shapioso" className="h-8 w-auto" />
+          <span className="text-xl font-display font-medium tracking-tight text-ink">Shapioso</span>
         </a>
 
         {/* Desktop Nav */}
@@ -106,11 +129,11 @@ export default function Navbar() {
                   onMouseLeave={hideDropdown}
                   className="absolute left-0 top-full mt-2 w-[640px] grid grid-cols-2 gap-3 rounded-xl bg-canvas p-4 shadow-[0_24px_64px_rgba(10,10,10,0.12)] border border-hairline-soft">
                   {item.dropdown.map((service) => (
-                    <a
-                      key={service.title}
-                      href="#"
-                      className="flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-surface-soft group"
-                    >
+                      <a
+                        key={service.title}
+                        href={`/services/${service.slug}`}
+                        className="flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-surface-soft group"
+                      >
                       <div
                         className={`shrink-0 w-12 h-12 rounded-md bg-gradient-to-br ${service.gradient} flex items-center justify-center text-white text-lg font-bold`}
                       >
@@ -135,7 +158,7 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
           <a
-            href="#"
+            href="/contact"
             className="flex items-center justify-center h-11 px-6 rounded-md bg-primary text-on-primary text-sm font-semibold tracking-[-0.3px] transition-colors hover:bg-primary-active"
           >
             Get a Quote
@@ -190,7 +213,7 @@ export default function Navbar() {
                     {item.dropdown.map((service) => (
                       <a
                         key={service.title}
-                        href="#"
+                        href={`/services/${service.slug}`}
                         className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-surface-soft"
                         onClick={() => setMobileOpen(false)}
                       >
@@ -209,7 +232,7 @@ export default function Navbar() {
           </nav>
           <div className="mt-4 px-3">
             <a
-              href="#"
+              href="/contact"
               className="flex items-center justify-center h-11 w-full rounded-md bg-primary text-on-primary text-sm font-semibold tracking-[-0.3px] transition-colors hover:bg-primary-active"
             >
               Get a Quote
