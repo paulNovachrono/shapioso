@@ -1,20 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, ArrowUpRight } from 'lucide-react';
+import { Mail, MapPin, Clock, Send } from 'lucide-react';
 
 const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'hello@shapioso.com',
-    href: 'mailto:hello@shapioso.com',
-  },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '+1 (555) 123-4567',
-    href: 'tel:+15551234567',
+    value: 'info@shapioso.com',
+    href: 'mailto:info@shapioso.com',
   },
   {
     icon: MapPin,
@@ -38,7 +32,6 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     service: '',
     message: '',
   });
@@ -157,7 +150,6 @@ export default function ContactPage() {
                       setFormData({
                         name: '',
                         email: '',
-                        phone: '',
                         service: '',
                         message: '',
                       });
@@ -210,46 +202,27 @@ export default function ContactPage() {
                       />
                     </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-5">
-                    <div>
-                      <label
-                        htmlFor="phone"
-                        className="block text-sm font-medium text-ink mb-1.5"
-                      >
-                        Phone Number
-                      </label>
-                      <input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+1 (555) 000-0000"
-                        className="w-full h-11 px-4 rounded-lg bg-surface-soft border border-hairline-soft text-sm text-ink placeholder:text-muted-soft focus:outline-none focus:border-hairline focus:bg-canvas transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="service"
-                        className="block text-sm font-medium text-ink mb-1.5"
-                      >
-                        Service Interested In
-                      </label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full h-11 px-4 rounded-lg bg-surface-soft border border-hairline-soft text-sm text-ink focus:outline-none focus:border-hairline focus:bg-canvas transition-colors appearance-none"
-                      >
-                        <option value="">Select a service</option>
-                        {services.map((s) => (
-                          <option key={s} value={s}>
-                            {s}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                  <div>
+                    <label
+                      htmlFor="service"
+                      className="block text-sm font-medium text-ink mb-1.5"
+                    >
+                      Service Interested In
+                    </label>
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="w-full h-11 px-4 rounded-lg bg-surface-soft border border-hairline-soft text-sm text-ink focus:outline-none focus:border-hairline focus:bg-canvas transition-colors appearance-none"
+                    >
+                      <option value="">Select a service</option>
+                      {services.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div>
                     <label
@@ -283,24 +256,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-canvas py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6 md:px-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-medium tracking-tight text-ink">
-            Prefer to Talk Right Away?
-          </h2>
-          <p className="mt-4 text-lg text-body mx-auto">
-            Give us a call and let&apos;s discuss your project over the phone.
-          </p>
-          <a
-            href="tel:+15551234567"
-            className="mt-8 inline-flex items-center justify-center gap-2 h-12 px-8 rounded-md bg-primary text-on-primary text-sm font-semibold transition-colors hover:bg-primary-active"
-          >
-            Call Us Now
-            <Phone className="w-4 h-4" />
-          </a>
-        </div>
-      </section>
     </main>
   );
 }

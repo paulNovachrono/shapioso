@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -170,20 +170,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:hello@shapioso.com"
+                  href="mailto:info@shapioso.com"
                   className="flex items-center gap-2 text-sm text-body hover:text-ink transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5 shrink-0 text-muted" />
-                  hello@shapioso.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+919876543210"
-                  className="flex items-center gap-2 text-sm text-body hover:text-ink transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5 shrink-0 text-muted" />
-                  +91 98765 43210
+                  info@shapioso.com
                 </a>
               </li>
               <li>
