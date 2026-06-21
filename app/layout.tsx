@@ -8,7 +8,7 @@ import { ToastProvider } from "./components/ToastProvider";
 export const metadata: Metadata = {
   title: "Shapioso",
   description: "Your digital partner",
-  icons: [{ rel: "icon", url: "/logo.jpeg" }],
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({
