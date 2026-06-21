@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Mail, MapPin, Clock, Send } from 'lucide-react';
+import { useToast } from '../components/ToastProvider';
 
 const contactInfo = [
   {
@@ -35,7 +36,7 @@ export default function ContactPage() {
     service: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const { showToast } = useToast();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -46,12 +47,10 @@ export default function ContactPage() {
   };
 
   const [sending, setSending] = useState(false);
-  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    setError('');
 
     try {
       const res = await fetch('/api/contact', {
@@ -60,13 +59,29 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        throw new Error('Failed to send message');
+        showToast(
+          'error',
+          'Failed to Send',
+          data.error || 'Something went wrong. Please try again.',
+        );
+        return;
       }
 
-      setSubmitted(true);
+      showToast(
+        'success',
+        'Message Sent!',
+        'We\'ll get back to you within 24 hours.',
+      );
+      setFormData({ name: '', email: '', service: '', message: '' });
     } catch {
-      setError('Something went wrong. Please try again.');
+      showToast(
+        'error',
+        'Network Error',
+        'Could not reach the server. Please try again.',
+      );
     } finally {
       setSending(false);
     }
@@ -144,48 +159,10 @@ export default function ContactPage() {
 
             {/* Form */}
             <div className="md:col-span-3">
-              {submitted ? (
-                <div className="rounded-xl bg-canvas border border-hairline-soft p-8 md:p-10 text-center">
-                  <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
-                    <svg
-                      className="w-6 h-6 text-emerald-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold text-ink">Thank You!</h3>
-                  <p className="mt-2 text-sm text-muted">
-                    Your message has been received. We&apos;ll get back to you
-                    within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({
-                        name: '',
-                        email: '',
-                        service: '',
-                        message: '',
-                      });
-                    }}
-                    className="mt-6 inline-flex items-center justify-center h-11 px-7 rounded-md border border-hairline text-ink text-sm font-semibold transition-colors hover:bg-surface-soft"
-                  >
-                    Send Another Message
-                  </button>
-                </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  className="rounded-xl bg-canvas border border-hairline-soft p-8 md:p-10 space-y-5"
-                >
+              <form
+                onSubmit={handleSubmit}
+                className="rounded-xl bg-canvas border border-hairline-soft p-8 md:p-10 space-y-5"
+              >
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
                       <label
@@ -264,9 +241,6 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 rounded-lg bg-surface-soft border border-hairline-soft text-sm text-ink placeholder:text-muted-soft focus:outline-none focus:border-hairline focus:bg-canvas transition-colors resize-y"
                     />
                   </div>
-                  {error && (
-                    <p className="text-sm text-red-500">{error}</p>
-                  )}
                   <button
                     type="submit"
                     disabled={sending}
@@ -276,7 +250,6 @@ export default function ContactPage() {
                     <Send className="w-4 h-4" />
                   </button>
                 </form>
-              )}
             </div>
           </div>
         </div>
