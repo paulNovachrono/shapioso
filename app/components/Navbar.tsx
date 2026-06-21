@@ -183,18 +183,12 @@ export default function Navbar() {
           <nav className="flex flex-col gap-1">
             {navItems.map((item) => (
               <div key={item.label}>
-                <button
-                  className="flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium text-body hover:text-ink rounded-lg hover:bg-surface-soft"
-                  onClick={() => {
-                    if (item.dropdown) {
-                      setActiveDropdown(activeDropdown === item.label ? null : item.label);
-                    } else {
-                      setMobileOpen(false);
-                    }
-                  }}
-                >
-                  {item.label}
-                  {item.dropdown && (
+                {item.dropdown ? (
+                  <button
+                    className="flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium text-body hover:text-ink rounded-lg hover:bg-surface-soft"
+                    onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
+                  >
+                    {item.label}
                     <svg
                       className={`w-3.5 h-3.5 transition-transform duration-200 ${
                         activeDropdown === item.label ? "rotate-180" : ""
@@ -206,8 +200,16 @@ export default function Navbar() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
-                  )}
-                </button>
+                  </button>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="flex w-full items-center justify-between px-3 py-2.5 text-sm font-medium text-body hover:text-ink rounded-lg hover:bg-surface-soft"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )}
                 {item.dropdown && activeDropdown === item.label && (
                   <div className="ml-3 mt-1 flex flex-col gap-1 pb-2">
                     {item.dropdown.map((service) => (
